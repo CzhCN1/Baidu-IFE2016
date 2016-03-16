@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Extra mission-4</title>
+	<style type="text/css">
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		.mid{
+			background-color: #ccc;
+			width: 400px;
+			height: 200px;
+			position: absolute;
+			top:50%;
+			left:50%;
+			margin-left:-200px;
+			margin-top:-100px;
+			overflow: hidden;
+		}
+		.round{
+			border: 50px solid #fc0;
+			-moz-border-radius: 50px;      /* Gecko browsers */
+			-webkit-border-radius: 50px;   /* Webkit browsers */
+			border-radius:50px;            /* W3C syntax */
+			width:0;
+			height: 0;
+			position: absolute;
+		}
+		.left-top{
+			top:-50px;
+			left:-50px;
+		}
+		.right-bottom{
+			bottom:-50px;
+			right:-50px;
+		}
+	</style>
+</head>
+<body>
+	<div class="mid">
+		<div class="round left-top"></div>
+		<div class="round right-bottom"></div>
+	</div>
+</body>
+</html>
