@@ -1,0 +1,281 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+.wrap{
+	margin: 0 auto;
+	width: 980px;
+	height: 1386px;
+/*	background-color: #ccc;*/
+}
+.header{
+	margin: 0 auto;
+	width: 892px;
+	height: 60px;
+	border-bottom: 2px solid #938e8c
+}
+.header p{
+	font-size: 12px;
+	font-family: "黑体";
+	color: #d45d5c;
+	float:right;
+	margin-top: 42px;
+}
+.pink{
+	background-color: #DB3E75;
+	float:left;
+	width: 105px;
+	height: 10px;
+	padding: 42px 0 8px 8px;
+	font-family: "黑体";
+	font-size:12px;
+	color: #fff ;
+}
+.top{
+	padding-top: 35px;
+	width: 892px;
+	margin: 0 auto;
+}
+.img6-1{
+	width: 640px;
+	height: 301px;
+	background: url(./img/6-1.png) no-repeat center center;
+}
+.about{
+	width: 203px;
+	float:right;
+	border-top: 2px solid #cc8091;
+	padding: 9px 0 0 2px;
+	font-family: "Microsoft YaHei";
+}
+.font-1{
+	font-size: 26px;
+	font-weight: 500;
+	color:#000;
+	border-bottom: 2px solid #000;
+	display: inline-block;
+	height: 26px;
+}
+.font-2{
+	margin:5px 0;
+	font-size: 12px;
+	color:#676767;
+	font-family: 楷体_GB2312;
+}
+.font-3{
+	font-size:116px;
+	color: #75b86b;
+	font-style: italic;
+	margin-left:-16px;
+}
+.font-4-1{
+	font-size: 55px;
+	float:left;
+	color:#cc8091;
+}
+.font-4-2{
+	font-size: 21px;
+	float:left;
+	color:#cc8091;
+	margin-top:22px;
+}
+.font-4-2-1{
+	line-height: 20px;
+}
+.font-4-2-2{
+	font-size:12px;
+	color:#cc8091;
+	height: 12px;
+	line-height: 10px;
+}
+.wwh{
+	margin-top: 40px;
+	overflow: hidden;
+}
+.wwh div{
+	float: left;
+	margin-right: 30px;
+	/*width: 230px;*/
+}
+.wwh h1{
+	font-size: 16px;
+	font-family: "Microsoft YaHei";
+	font-weight: bold;
+	text-decoration: underline;
+	margin-bottom: 10px;
+}
+.wwh p{
+	font-size: 12px;
+	font-family: "SimSun";
+	color:#767777;
+	margin-bottom: 6px;
+}
+.proportion{
+	margin-top: 20px;
+	font-family: "Microsoft YaHei";
+	opacity: 0.7;
+}
+.bottom{
+	margin:70px auto 0;
+	width: 892px;
+	clear:both;
+	overflow: hidden;
+}
+.left{
+	float:left;
+	width: 415px;
+	margin-top: 10px;
+}
+.title{
+	border-bottom: 2px solid #11456b;
+	font-weight: bold;
+	font-family: "SimHei";
+	padding-bottom: 5px;
+}
+.title p{
+	font-size: 33px;
+	color:#11456b;
+	line-height: 35px;
+}
+.title p em{
+	font-size: 72px;
+	color: #f5e327;
+}
+.text{
+	margin-top: 25px;
+}
+.text .qian{
+	font-size: 70px;
+	color: #f5e327;
+	font-family: "Microsoft YaHei";
+	float: left;
+	padding: 0 5px 10px 0;
+	height: 70px;
+}
+.text .img6-2{
+	float:right;
+	width: 167px;
+	height: 288px;
+	background:url(./img/6-3.png) no-repeat center center;
+	margin: 1em 0 1em 1em;
+}
+.text p{
+	font-size: 12px;
+	color:#767777;
+	font-family: "SimSun";
+}
+.right{
+	float: right;
+}
+.img6-3{
+	width: 458px;
+	height: 257px;
+	background:url(./img/6-2.png) no-repeat center center;
+}
+.list{
+	width:459px;
+	height: 318px;
+	margin-top: 32px;
+	background:#EAF1CF;
+	padding-top: 32px;
+	position: relative;
+}
+.list p{
+	font-size: 16px;
+	color: #5a5b5b;
+	font-family: "SimSun";
+	margin: 0 0 20px 32px;
+	vertical-align: center;
+}
+.list p i{
+	background: url(./img/tri.jpg) no-repeat center center;
+}
+.list p span{
+	font-size: 12px;
+	color:#5a5b5b;
+	font-family: "SimSun";
+	font-style: italic;
+}
+.bot{
+	width: 458px;
+	height: 160px;
+	position: absolute;
+	bottom: 0;
+}
+.bot .bot-pink{
+	width: 260px;
+	height: 160px;
+	float:left;
+	background-color: #d45d5c;
+	margin-right:20px;
+	position: relative;
+}
+.hello{
+	font-size: 14px;
+	color:#5a5b5b;
+	padding-right: 8px;
+}
+.hello .dot-L,.dot-R{
+	font-size: 72px;
+	color: #d45d5c;
+	font-family: "SimHei";
+	line-height: 20px;
+}
+.dot-L{
+	float: left;
+	margin-right: 10px;
+	position: relative;
+	top: 15px;
+}
+.dot-R{
+	float: right;
+	position: relative;
+	bottom: 20px;
+	right: 20px;
+}
+.content{
+	position:absolute;
+	height: 86px;
+	top:20%;
+/*			margin-top:-50px;*/
+}
+.content .zero{
+	height: 86px;
+	width: 50px;
+	font-size: 110px;
+	color: #fff;
+	font-family: "Microsoft YaHei";
+	line-height: 110px;
+	margin-left: 15px;
+}
+.num{
+	height: 86px;
+	position:absolute;
+	top:15%;
+	left:80px;
+	border-left: 2px solid #fff
+}
+.num p{
+	margin: 3px 8px;
+	font-size: 18px;
+	color:#fff;
+	font-family: "SimHei";
+	font-style: italic;
+	line-height: 21px;
+}
+.num p span{
+	font-size: 12px;
+	color: #fff;
+	font-family: "SimHei";
+	line-height: 5px;
+}
+.footer{
+	margin: 38px auto;
+	width: 892px;
+	border-top:1px solid #938e8c;
+}
+.footer p{
+	font-size: 12px;
+	color: #d45d5c;
+	float: right;
+}
