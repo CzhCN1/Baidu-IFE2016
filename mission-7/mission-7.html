@@ -3,315 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Extra mission-7</title>
-	<style type="text/css">
-		*{
-			margin: 0;
-			padding: 0;
-			text-decoration: none;
-		}
-		.wrap{
-			width: 1280px;
-			margin: 0 auto;
-		}
-
-		/*
-			header
-		 */
-		.header{
-			height: 56px;
-			background: url(./img/newWorld.png) no-repeat 58px center,url(./img/login.png) no-repeat 1165px center;
-		}
-		.nav{
-			margin-left:681px;
-			height: 54px;
-			line-height: 50px;
-		}
-		.nav li{
-			float: left;
-			display: block;
-			width: 64px;
-			text-align: center;
-			margin-right:34px;
-		}
-		.nav li a{
-			font-family: "Microsoft YaHei";
-			font-size: 14px;
-			color:#787b83;
-		}
-		.nav .select{
-			border-bottom: 4px solid #e74f4d;
-			padding-bottom:1px;
-		}
-		.nav .select a{
-			color: #e74f4d;
-		}
-
-		/*
-			big image
-		 */
-		.bigImg{
-			background: url(./img/bigImg.png) no-repeat center center;
-			height: 691px;
-			position: relative;
-		}
-		.bigImg  .start{
-			font-family: "Microsoft YaHei";
-			font-size: 32px;
-			color:#fff;
-			background: #E8504F;
-			width: 330px;
-			height: 64px;
-
-			position: absolute;
-			left:126px;
-			top: 430px;
-			line-height: 64px;
-			text-indent: 100px;
-		}
-
-		/*
-			four icons
-		 */
-		.icons{
-			height: 252px;
-/*			background: url(./img/icon1.png) no-repeat;*/
-		}
-		.icons div{
-			width: 318px;
-			float:left;
-			text-align: center;
-			border-left:1px solid #BABABA;
-			border-right: 1px solid #ABABAB;
-			/*padding-top: 133px;*/
-		}
-		.icons div p{
-			height: 54px;
-			width: 160px;
-			font-size: 14px;
-			font-family: "SimHei";
-			color: #767777;
-			margin: 0 auto;
-		}
-		.icons .icon{
-			border: none;
-			width: 1280px;
-			height: 133px;
-			background: url(./img/icon1.png) no-repeat 143px center, url(./img/icon2.png) no-repeat 470px center, url(./img/icon3.png) no-repeat 780px center, url(./img/icon4.png) no-repeat 1103px center;
-			clear:both;
-		}
-
-		/*
-			red book
-		 */
-		.book{
-			height:350px;
-			background: url(./img/book.png) no-repeat center 88px;
-			background-color:#EDEDED;
-		}
-		.book p{
-			font-size:54px;
-			font-family: "SimHei";
-			color: #323333;
-			opacity: 0.5;
-			text-align: center;
-			padding-top: 230px;
-		}
-
-		/*
-			look map
-		 */
-		.map{
-			height: 341px;
-			background: url(./img/map.png);
-		}
-
-		/*
-			four pictures
-		 */
-		.pics{
-			background-color: #F8F8F8;
-		}
-		.pics div{
-			float: left;
-			text-align: center;
-			margin-right: 35px;
-		}
-		.pics .picwrap{
-			float:none;
-			margin: 0 140px 0;
-			overflow: hidden;
-			padding: 100px 0 100px;
-		}
-
-		.pics .picwrap div{
-			font-size:15px;
-			font-family: "Microsoft YaHei";
-			color: #000;
-			text-align: center;
-		}
-		.picSelect {
-			letter-spacing:30px;
-			font-size: 23px;
-			padding-left: 23px;
-		}
-		.pics .picwrap .sub{
-			font-size: 12px;
-			color: #A4A4A4;
-			margin-top: 5px;
-		}
-
-		.time{
-			height: 566px;
-			background: url(./img/TIME.png) no-repeat;
-		}
-		.rightContent{
-			float: right;
-			width: 290px;
-			height: 235px;
-			text-align: center;
-			margin-right: 60px;
-			margin-top: 166px;
-		}
-		.rightContent h1{
-			font-size: 21px;
-			color:#323333;
-			font-family: "SimHei";
-			font-weight: normal;
-			margin-bottom: 10px;
-		}
-		.rightContent h1 span{
-			color: #E74F4E;
-		}
-		.rightContent p{
-			font-size: 12px;
-			font-family: "SimSun";
-			color: #cecfcf;
-			text-align: left;
-			line-height:30px;
-		}
-		.detail{
-			width: 106px;
-			height: 33px;
-			color: #e74f4d;
-			border: 1px solid #e74f4d;
-			line-height: 33px;
-			text-align: center;
-			margin:48px auto 26px;
-			font-size: 14px;
-		}
-		.dot{
-			height: 12px;
-			margin:0 auto;
-		}
-		.dot img{
-			margin:5px;
-		}
-
-		.newlife{
-			background: url(./img/women.png) no-repeat right center;
-			height: 520px;
-		}
-		.newlife div{
-			width:426px;
-			height: 520px;
-			float: left;
-			overflow: hidden;
-		}
-		.newlife .lookmore{
-			width:426px;
-			margin: 173px auto 0;
-			text-align: center;
-			font-size: 21px;
-			font-family: "SimHei";
-		}
-		.newlife .lookmore hr{
-			height: 2px;
-			width: 30px;
-			margin: 24px auto 0 ;
-		}
-		.newlife .red{
-			background-color: #e74f4d;
-		}
-		.newlife .red .lookmore{
-			color:#FFF;
-		}
-		.newlife .red .lookmore hr{
-			color: #FFF;
-		}
-		.newlife .lookmore .btn{
-			text-align: center;
-			width: 169px;
-			height:44px;
-			line-height: 44px;
-			margin:24px 0 0 130px;
-		}
-		.newlife .red .lookmore .btn{
-			border: 1px solid #FFF;
-		}
-		.newlife .white .lookmore .btn{
-			border: 1px solid #e74f4d;
-			color: #e74f4d;
-		}
-
-		.volunteer{
-			height: 180px;
-			text-align: center;
-		}
-		.volunteer hr{
-			height: 2px;
-			width: 30px;
-			color: #e74f4d;
-			margin: 10px auto 16px;
-		}
-		.volunteer h1{
-			font-size: 21px;
-			font-family: "SimHei";
-			color: #323333;
-			margin-top: 120px;
-		}
-		.volunteer p{
-			font-size: 12px;
-			font-family: "Microsoft YaHei";
-			color: #767777;
-		}
-
-		.form{
-			width: 1005px;
-			height: 285px;
-			margin: -35px auto 0;
-		}
-		.more{
-			width: 290px;
-			height: 285px;
-			float: left;
-		}
-		.more h1{
-			font-size: 14px;
-			font-family: "SimHei";
-			color: #767777;
-			clear: both;
-			margin:35px 0 25px;
-		}
-		.more p{
-			font-size: 12px;
-			font-family: "SimSun";
-			color: #767777;
-			clear: both;
-		}
-		.more .drop{
-			font-size: 12px;
-			float: right;
-			color: #767777;
-		}
-		.more .drop img{
-			margin-right: 6px;
-		}
-
-		.form form{
-			width:640px;
-			height: 284px;
-		}
-	</style>
+	<link rel="stylesheet" type="text/css" href="./mission-7.css">
 </head>
 <body>
 	<div class="wrap">
@@ -325,7 +17,7 @@
 			</ul>
 		</div>
 		<div class="bigImg">
-			<div class="start">开始体验</div>
+			<div class="start pointer">开始体验</div>
 		</div>
 		<div class="icons">
 			<div class="icon"></div>
@@ -338,7 +30,12 @@
 			<p>关于新世界，你不知道的还有什么？</p>
 		</div>
 		<div class="map">
-
+			<div class="option">
+				<div>中国<img src="./img/pinkdrop.png" class="pointer"></div>
+				<div>中国<img src="./img/pinkdrop.png" class="pointer"></div>
+				<div>中国<img src="./img/pinkdrop.png" class="pointer"></div>
+				<div class="search pointer">搜 索</div>
+			</div>
 		</div>
 
 		<div class="pics">
@@ -354,7 +51,7 @@
 			<div class="rightContent">
 				<h1>新世界/<span>01</span></h1>
 				<p>新世界是个新世界是个新世界是个新世界是个新世界是个新世界是个新世界是个新世界是个新世界是个新世界是个新世界是个新世界是个新世界是个新世界是个新世界是个新世界是个新世界是个新世界是个新世界是个新世界是个新世界是个新世界是个</p>
-				<div class="detail">更多详情</div>
+				<div class="detail pointer">更多详情</div>
 				<div class="dot">
 					<img src="./img/dot-select.png">
 					<img src="./img/dot.png">
@@ -369,7 +66,7 @@
 					<p>新时代</p>
 					<p>关于爱生活的我们</p>
 					<hr />
-					<div class="btn">查看更多</div>
+					<div class="btn pointer">查看更多</div>
 				</div>
 			</div>
 			<div class="white">
@@ -377,7 +74,7 @@
 					<p>新时代</p>
 					<p>关于爱生活的我们</p>
 					<hr />
-					<div class="btn">查看更多</div>
+					<div class="btn pointer">查看更多</div>
 				</div>
 			</div>
 		</div>
@@ -391,22 +88,41 @@
 			<div class="more">
 				<h1>新世界志愿者协议</h1>
 				<p>加入新世界志愿者的人员必须遵守中华人民共和国的相关法律法规，并且本着平等资源的原则. . . . . . </p>
-				<div class="drop"><img src="./img/drop.png">more</div>
+				<div class="drop pointer"><img src="./img/drop.png">more</div>
 				<h1>新世界志愿者权利</h1>
 				<p>新世界志愿者享受新世界内部所有资源共享的权利，并且享受所在四新世界活动的优先参与资格</p>
-				<div class="drop"><img src="./img/drop.png">more</div>
+				<div class="drop pointer"><img src="./img/drop.png">more</div>
 				<h1>更多条款</h1>
-				<div class="drop"><img src="./img/drop.png">more</div>
+				<div class="drop pointer"><img src="./img/drop.png">more</div>
 			</div>
 			<form>
-				<div class="little-left"></div>
-				<div class="little-right"></div>
-				<div class="little-left"></div>
-				<div class="little-right"></div>
-				<div class="normal"></div>
-				<div class="big"></div>
+				<div class="little left">姓名:</div>
+				<div class="little right">年龄:</div>
+				<div class="little left">联系方式:</div>
+				<div class="little right">联系地址:</div>
+				<div class="big">请简单描述您梦想的生活:</div>
+				<div class="submit pointer">提交申请</div>
 			</form>
 		</div>
+		<div class="contact">
+			<h1>联系我们</h1>
+			<p>为了更好的获取我们最新的产品资讯，您可以留下您的电子邮箱快速订阅我们的产品资讯</p>
+			<p>也可以通过以下任何方式关注我们动态</p>
+			<div class="email">
+				<input type="text" value="someone@email.com"></input>
+				<div class="input-btn pointer">提 交</div>
+			</div>
+			<div class="social">
+				<img src="./img/social1.png" class="pointer">
+				<img src="./img/social2.png" class="pointer">
+				<img src="./img/social3.png" class="pointer">
+				<img src="./img/social4.png" class="pointer">
+			</div>
+		</div>
+		<footer>
+			<p class="left">@2016新世界</p>
+			<p class="right pointer">back to top</p>
+		</footer>
 	</div>
 </body>
 </html>

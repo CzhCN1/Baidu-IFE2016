@@ -1,0 +1,438 @@
+*{
+	margin: 0;
+	padding: 0;
+	text-decoration: none;
+}
+.wrap{
+	width: 1280px;
+	margin: 0 auto;
+}
+
+/*
+	header
+ */
+.header{
+	height: 56px;
+	background: url(./img/newWorld.png) no-repeat 58px center,url(./img/login.png) no-repeat 1165px center;
+}
+.nav{
+	margin-left:681px;
+	height: 54px;
+	line-height: 50px;
+}
+.nav li{
+	float: left;
+	display: block;
+	width: 64px;
+	text-align: center;
+	margin-right:34px;
+}
+.nav li a{
+	font-family: "Microsoft YaHei";
+	font-size: 14px;
+	color:#787b83;
+}
+.nav .select{
+	border-bottom: 4px solid #e74f4d;
+	padding-bottom:1px;
+}
+.nav .select a{
+	color: #e74f4d;
+}
+
+/*
+	big image
+ */
+.bigImg{
+	background: url(./img/bigImg.png) no-repeat center center;
+	height: 691px;
+	position: relative;
+}
+.bigImg  .start{
+	font-family: "Microsoft YaHei";
+	font-size: 32px;
+	color:#fff;
+	background: #E8504F;
+	width: 330px;
+	height: 64px;
+
+	position: absolute;
+	left:126px;
+	top: 430px;
+	line-height: 64px;
+	text-indent: 100px;
+}
+
+/*
+	four icons
+ */
+.icons{
+	height: 252px;
+}
+.icons div{
+	width: 318px;
+	float:left;
+	text-align: center;
+	border-left:1px solid #BABABA;
+	border-right: 1px solid #ABABAB;
+}
+.icons div p{
+	height: 54px;
+	width: 160px;
+	font-size: 14px;
+	font-family: "SimHei";
+	color: #767777;
+	margin: 0 auto;
+}
+.icons .icon{
+	border: none;
+	width: 1280px;
+	height: 133px;
+	background: url(./img/icon1.png) no-repeat 143px center, url(./img/icon2.png) no-repeat 470px center, url(./img/icon3.png) no-repeat 780px center, url(./img/icon4.png) no-repeat 1103px center;
+	clear:both;
+}
+
+/*
+	red book
+ */
+.book{
+	height:350px;
+	background: url(./img/book.png) no-repeat center 88px;
+	background-color:#EDEDED;
+}
+.book p{
+	font-size:54px;
+	font-family: "SimHei";
+	color: #323333;
+	opacity: 0.5;
+	text-align: center;
+	padding-top: 230px;
+}
+
+/*
+	look map
+ */
+.map{
+	height: 341px;
+	background: url(./img/map.png);
+}
+.map .option{
+	width: 1064px;
+	margin: 0 auto;
+	padding-top: 172px;
+}
+.map .option div{
+	width: 211px;
+	height: 36px;
+	margin-right:30px;
+	background: #FFF;
+	font-size: 12px;
+	font-family: "Microsoft YaHei";
+	color: #BABABA;
+	float: left;
+	line-height: 36px;
+	padding:0 10px 0 15px;
+}
+.map .option img{
+	float: right;
+	margin-top: 8px;
+}
+.map .option .search{
+	background-color:#BE4E48;
+	color: #FFF;
+	font-size: 14px;
+	text-align: center;
+	letter-spacing: 10px;
+}
+
+/*
+	four pictures
+ */
+.pics{
+	background-color: #F8F8F8;
+}
+.pics div{
+	float: left;
+	text-align: center;
+	margin-right: 35px;
+}
+.pics .picwrap{
+	float:none;
+	margin: 0 140px 0;
+	overflow: hidden;
+	padding: 100px 0 100px;
+}
+
+.pics .picwrap div{
+	font-size:15px;
+	font-family: "Microsoft YaHei";
+	color: #000;
+	text-align: center;
+}
+.picSelect {
+	letter-spacing:30px;
+	font-size: 23px;
+	padding-left: 23px;
+}
+.pics .picwrap .sub{
+	font-size: 12px;
+	color: #A4A4A4;
+	margin-top: 5px;
+}
+
+.time{
+	height: 566px;
+	background: url(./img/TIME.png) no-repeat;
+}
+.rightContent{
+	float: right;
+	width: 290px;
+	height: 235px;
+	text-align: center;
+	margin-right: 60px;
+	margin-top: 166px;
+}
+.rightContent h1{
+	font-size: 21px;
+	color:#323333;
+	font-family: "SimHei";
+	font-weight: normal;
+	margin-bottom: 10px;
+}
+.rightContent h1 span{
+	color: #E74F4E;
+}
+.rightContent p{
+	font-size: 12px;
+	font-family: "SimSun";
+	color: #cecfcf;
+	text-align: left;
+	line-height:30px;
+}
+.detail{
+	width: 106px;
+	height: 33px;
+	color: #e74f4d;
+	border: 1px solid #e74f4d;
+	line-height: 33px;
+	text-align: center;
+	margin:48px auto 26px;
+	font-size: 14px;
+}
+.dot{
+	height: 12px;
+	margin:0 auto;
+}
+.dot img{
+	margin:5px;
+}
+
+.newlife{
+	background: url(./img/women.png) no-repeat right center;
+	height: 520px;
+}
+.newlife div{
+	width:426px;
+	height: 520px;
+	float: left;
+	overflow: hidden;
+}
+.newlife .lookmore{
+	width:426px;
+	margin: 173px auto 0;
+	text-align: center;
+	font-size: 21px;
+	font-family: "SimHei";
+}
+.newlife .lookmore hr{
+	height: 2px;
+	width: 30px;
+	margin: 24px auto 0 ;
+}
+.newlife .red{
+	background-color: #e74f4d;
+}
+.newlife .red .lookmore{
+	color:#FFF;
+}
+.newlife .red .lookmore hr{
+	color: #FFF;
+}
+.newlife .lookmore .btn{
+	text-align: center;
+	width: 169px;
+	height:44px;
+	line-height: 44px;
+	margin:24px 0 0 130px;
+}
+.newlife .red .lookmore .btn{
+	border: 1px solid #FFF;
+}
+.newlife .white .lookmore .btn{
+	border: 1px solid #e74f4d;
+	color: #e74f4d;
+}
+
+.volunteer{
+	height: 180px;
+	text-align: center;
+}
+.volunteer hr{
+	height: 2px;
+	width: 30px;
+	color: #e74f4d;
+	margin: 10px auto 16px;
+}
+.volunteer h1{
+	font-size: 21px;
+	font-family: "SimHei";
+	color: #323333;
+	margin-top: 120px;
+}
+.volunteer p{
+	font-size: 12px;
+	font-family: "Microsoft YaHei";
+	color: #767777;
+}
+
+.form{
+	width: 1005px;
+	height: 285px;
+	margin: -35px auto 0;
+}
+.more{
+	width: 290px;
+	height: 285px;
+	float: left;
+	margin-top: -35px;
+}
+.more h1{
+	font-size: 14px;
+	font-family: "SimHei";
+	color: #767777;
+	clear: both;
+	margin:35px 0 25px;
+}
+.more p{
+	font-size: 12px;
+	font-family: "SimSun";
+	color: #767777;
+	clear: both;
+}
+.more .drop{
+	font-size: 12px;
+	float: right;
+	color: #767777;
+}
+.more .drop img{
+	margin-right: 6px;
+}
+
+.form{
+	margin-bottom: 166px;
+	margin-top: 35px;
+}
+.form form{
+	width:640px;
+	height: 284px;
+	float: right;
+}
+.form form div{
+	background: #EDEDEF;
+	margin-bottom:14px;
+	padding: 10px 18px;
+}
+.form form .little{
+	width:274px;
+	height:20px;
+	background-color: #EDEDEF;
+	line-height: 20px;
+	font-size: 12px;
+}
+.form form .left{
+	float: left;
+}
+.form form .right{
+	float: right;
+}
+.form form .big{
+	clear: both;
+	height: 100px;
+	font-size: 12px;
+}
+.form form .submit{
+	text-align: center;
+	font-size: 14px;
+	font-family: "SimHei";
+	color: #323333;
+}
+.contact{
+	background-color: #33363F;
+	height: 360px;
+	text-align: center;
+	color: #FFF;
+}
+.contact h1{
+	font-size: 21px;
+	font-family: "SimHei";
+	font-weight: normal;
+	padding-top: 80px;
+	line-height: 40px;
+}
+.contact p{
+	font-size: 12px;
+	font-family: "SimSun";
+	line-height: 20px;
+}
+.contact input{
+	width: 422px;
+	height: 42px;
+	border: none;
+	font-size: 14px;
+	padding-left: 10px;
+	float: left;
+}
+.contact .email{
+	width: 512px;
+	overflow: hidden;
+	padding-top: 30px;
+	margin: 0 auto;
+}
+.contact .input-btn{
+	height: 42px;
+	width: 80px;
+	background-color: #717179;
+	font-family: "Microsoft YaHei";
+	font-size: 15px;
+	line-height: 42px;
+	float: left;
+}
+.contact .social{
+	width: 182px
+	height:25px;
+	margin: 36px auto 0;
+}
+.contact .social img{
+	margin-right: 20px;
+}
+footer{
+	height: 58px;
+	background-color: #30303A;
+}
+footer p{
+	color: #FFF;
+	font-size: 12px;
+	font-family: "SimSun";
+	line-height: 58px;
+	margin: 0 100px;
+}
+footer .left{
+	float: left;
+}
+footer .right{
+	float: right;
+}
+.pointer:hover{
+	cursor:pointer;
+	opacity: 0.95;
+}
