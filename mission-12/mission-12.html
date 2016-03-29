@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Extra mission-12</title>
+	<style type="text/css">
+		body{
+			width: 100%;
+		}
+		table tr:nth-of-type(odd){
+			background-color: #CDCDCD;
+		}
+		table tr:nth-of-type(1){
+			background: #000;
+			color: #FFF;
+		}
+		table tr:nth-of-type(2),tr:nth-of-type(3),tr:nth-of-type(4){
+			color: #f00;
+		}
+		input{
+			display: block;
+			width: 100px;
+			height: 20px;
+			margin: 0 auto;
+
+			transition:width 1s, height 1s;
+			-moz-transition:width 1s, height 1s; /* Firefox 4 */
+			-webkit-transition:width 1s, height 1s; /* Safari and Chrome */
+			-o-transition:width 1s, height 1s; /* Opera */
+		}
+		input:focus{
+			width: 200px;
+			height: 30px;
+		}
+
+		.round {
+			width: 300px;
+			height: 150px;
+			overflow: hidden;
+		}
+		.wrap{
+			width: 1200px;
+			height: 150px;
+			margin-left: -900px;
+		}
+		.wrap div{
+			width: 300px;
+			height: 150px;
+			float: left;
+		}
+		.wrap div:nth-of-type(2){
+			background-color: #f00;
+		}
+		.wrap div:nth-of-type(3){
+			background-color: #0f0;
+		}
+		.wrap div:nth-of-type(1),div:nth-of-type(4){
+			background-color: #00f;
+		}
+
+		@keyframes animate{
+			0% {margin-left:-900px;}
+			20% {margin-left:-900px;}
+			33% {margin-left:-600px;}
+			53% {margin-left:-600px;}
+			66% {margin-left:-300px;}
+			86% {margin-left: -300px;}
+			100%{margin-left: 0px;}
+		}
+
+		@-moz-keyframes animate {
+			0% {margin-left:-900px;}
+			20% {margin-left:-900px;}
+			33% {margin-left:-600px;}
+			53% {margin-left:-600px;}
+			66% {margin-left:-300px;}
+			86% {margin-left: -300px;}
+			100%{margin-left: 0px;}
+		}
+
+		@-webkit-keyframes animate {
+			0% {margin-left:-900px;}
+			20% {margin-left:-900px;}
+			33% {margin-left:-600px;}
+			53% {margin-left:-600px;}
+			66% {margin-left:-300px;}
+			86% {margin-left: -300px;}
+			100%{margin-left: 0px;}
+		}
+		.wrap{
+			animation: animate 10s;
+			-moz-animation: animate 10s;	/* Firefox */
+			-webkit-animation: animate 10s;	/* Safari 和 Chrome */
+
+			animation-iteration-count: infinite;
+			-webkit-animation-iteration-count: infinite; /* Safari 和 Chrome */
+		}
+	</style>
+</head>
+<body>
+	<table>
+		<tr>
+			<th>排名</th>
+			<th>网站</th>
+			<th>热度</th>
+		</tr>
+		<tr>
+			<th>1.</th>
+			<th>百度前端技术学院</th>
+			<th>13000</th>
+		</tr>
+		<tr>
+			<th>2.</th>
+			<th>百度前端技术学院</th>
+			<th>12000</th>
+		</tr>
+		<tr>
+			<th>3.</th>
+			<th>百度前端技术学院</th>
+			<th>11000</th>
+		</tr>
+		<tr>
+			<th>4.</th>
+			<th>百度前端技术学院</th>
+			<th>10000</th>
+		</tr>
+		<tr>
+			<th>5.</th>
+			<th>百度前端技术学院</th>
+			<th>9000</th>
+		</tr>
+		<tr>
+			<th>6.</th>
+			<th>百度前端技术学院</th>
+			<th>8000</th>
+		</tr>
+		<tr>
+			<th>7.</th>
+			<th>百度前端技术学院</th>
+			<th>7000</th>
+		</tr>
+		<tr>
+			<th>8.</th>
+			<th>百度前端技术学院</th>
+			<th>6000</th>
+		</tr>
+		<tr>
+			<th>9.</th>
+			<th>百度前端技术学院</th>
+			<th>5000</th>
+		</tr>
+		<tr>
+			<th>10.</th>
+			<th>百度前端技术学院</th>
+			<th>4000</th>
+		</tr>
+	</table>
+
+	<input type="text"></input>
+
+	<div class="round">
+		<div class="wrap">
+			<div>1</div>
+			<div>3</div>
+			<div>2</div>
+			<div>1</div>
+		</div>
+	</div>
+</body>
+</html>
