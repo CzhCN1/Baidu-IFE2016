@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="UTF-8">
+	<style type="text/css">
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		form{
+			padding: 20px;
+		}
+		form>div{
+			margin-top: 50px;
+		}
+		form>div>span{
+			font-size: 20px;
+			margin-right: 20px;
+		}
+		form>div>p{
+
+			text-indent: 60px;
+		/*	display: none;*/
+		}
+		input[type*="text"]{
+			width: 300px;
+			height: 38px;
+			border-style: none;
+			border: 2px solid #CCC;
+			border-radius: 7px;
+		}
+		input[type*="button"]{
+			height: 40px;
+			width: 70px;
+			border: 1px solid #2A6CA7;
+			border-radius: 5px;
+			background: #2F79BA;
+			font-size: 20px;
+			color: #FFF;
+			margin-left: 10px;
+		}
+		.error p{
+			color:#ABABAB;
+		}
+		.error input[type*="text"]{
+			border-color:#ABABAB;
+		}
+		.blank p{
+			color: #DD0010;
+		}
+		.blank input[type*="text"]{
+			border-color:#DD0010;
+		}
+		.pass p{
+			color: #77C663;
+		}
+		.pass input[type*="text"]{
+			border-color: #77C663;
+		}
+	</style>
+</head>
+<body>
+	<form id="myForm">
+		<div>
+			<span>名称</span><input type="text"/>
+			<input type="button" value="验证" />
+			<p id="message"></p>
+		</div>
+
+	</form>
+
+	<script type="text/javascript">
+		function check(eventObj){
+			var pNode = eventObj.parentNode;
+			var inputValue = pNode.getElementsByTagName('input')[0].value;
+			var valueLen=0;
+			for(var i=inputValue.length;i>0;i--){
+				if(inputValue.charCodeAt(i-1)>256){
+					valueLen += 2;
+				}else{
+					valueLen++;
+				}
+			}
+			if(valueLen === 0){
+				return "blank";
+			}else if(valueLen >= 4 && valueLen <= 16){
+				return "pass";
+			}else{
+				return "error";
+			}
+		}
+		var myForm = document.getElementById('myForm');
+		myForm.addEventListener('click',function(event){
+			var newP = document.getElementById("message");
+			if(event && event.target && event.target.type=="button"){
+				switch (check(event.target)){
+				case "blank":
+					newP.innerHTML = "姓名不能为空";
+					event.target.parentNode.className = "blank";
+					break;
+				case "pass":
+					newP.innerHTML = "名称格式正确";
+					event.target.parentNode.className = "pass";
+					break;
+				case "error":
+					newP.innerHTML = "必填，长度为4～16个字符";
+					event.target.parentNode.className = "error";
+				}
+			}
+		},false);
+	</script>
+</body>
+</html>
