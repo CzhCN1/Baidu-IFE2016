@@ -1,47 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Extra mission-13</title>
+	<title>Extra mission-33</title>
 	<meta charset="UTF-8">
-	<style type="text/css">
-		*{
-			padding: 0;
-			margin: 0;
-		}
-		table{
-			border-collapse:collapse;
-			margin: -5px;
-		}
-		td{
-			width: 60px;
-			height: 60px;
-			border: 1px solid #CCC;
-			text-align: center;
-		}
-		tr:nth-of-type(1) td:nth-of-type(1){
-			border: none;
-		}
-
-		tr:nth-last-of-type(1) td{
-			border-bottom:2px solid #000;
-		}
-		tr td:nth-of-type(1){
-			border:none;
-			border-right: 2px solid #000;
-		}
-		tr td:nth-last-of-type(1){
-			border-right: 2px solid #000;
-		}
-		tr:nth-of-type(1) td{
-			border:0;
-			border-bottom: 2px solid #000;
-		}
-	</style>
+	<link rel="stylesheet" type="text/css" href="mission-33.css">
 </head>
 <body>
 	<table>
 		<tr class="firstline"><td></td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td></tr>
-		<tr><td>1</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+		<tr><td>1</td><td class="top"><div></div><div></div></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
 		<tr><td>2</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
 		<tr><td>3</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
 		<tr><td>4</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
@@ -52,5 +19,11 @@
 		<tr><td>9</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
 		<tr><td>10</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
 	</table>
+	<div class="input">
+		<input type="text" id="go"></input>
+		<input type="button" id="do" value="执行"></input>
+	</div>
+
+	<script type="text/javascript" src="mission-33.js"></script>
 </body>
 </html>
