@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Extra mission-22</title>
+	<meta charset="UTF-8">
+	<style type="text/css">
+	*{
+		padding: 0;
+		margin: 0;
+	}
+	div{
+		border: 1px solid #000;
+		display: flex;
+		flex-flow: row;
+		justify-content:space-around;
+		align-items:center;
+		background: #FFF;
+	}
+	#root{
+		width: 730px;
+		height: 240px;
+		margin:  100px;
+	}
+	#root>div{
+		width: 344px;
+		height: 200px;
+	}
+	#root>div>div{
+		width: 150px;
+		height: 160px;
+	}
+	#root>div>div>div{
+		width: 54px;
+		height: 120px;
+	}
+	#in{
+		width: 250px;
+		border: none;
+		position: absolute;
+		left: 350px;
+		top:400px;
+	}
+	</style>
+</head>
+<body>
+	<div id="root" >
+		<div id="L1">
+			<div id="L11">
+				<div id="L111"></div>
+				<div id="L112"></div>
+			</div>
+			<div id="L12">
+				<div id="L121"></div>
+				<div id="L122"></div>
+			</div>
+		</div>
+		<div id="R1">
+			<div id="R11">
+				<div id="R111"></div>
+				<div id="R112"></div>
+			</div>
+			<div id="R12">
+				<div id="R121"></div>
+				<div id="R122"></div>
+			</div>
+		</div>
+	</div>
+
+	<div id="in">
+		<input type="button" value="前序"></input>
+		<input type="button" value="中序"></input>
+		<input type="button" value="后序"></input>
+		<select id="sel">
+			<option value="3">慢</option>
+			<option value="2">中</option>
+			<option value="1">快</option>
+		</select>
+	</div>
+
+	<script type="text/javascript">
+		var inDiv = document.getElementById('in'),
+		      sel = document.getElementById('sel'),
+		      speed,
+		      nodeStack = [],
+		      goingFlag = false;
+
+		//前序
+		function DLR(node){
+			nodeStack.push(node);
+			if(node.firstElementChild){
+				DLR(node.firstElementChild);
+			}
+			if(node.lastElementChild){
+				DLR(node.lastElementChild);
+			}
+		}
+		//中序
+		function LDR(node){
+			if(node.firstElementChild){
+				LDR(node.firstElementChild);
+			}
+			nodeStack.push(node);
+			if(node.lastElementChild){
+				LDR(node.lastElementChild);
+			}
+		}
+		//后序
+		function LRD(node){
+			if(node.firstElementChild){
+				LRD(node.firstElementChild);
+			}
+			if(node.lastElementChild){
+				LRD(node.lastElementChild);
+			}
+			nodeStack.push(node);
+		}
+
+		function animate(speed){
+			var i = 0,
+			      len = nodeStack.length,
+			      timer = setInterval(function(){
+				if(i){
+					nodeStack[i-1].style.backgroundColor = "#FFF";
+				}
+				nodeStack[i].style.backgroundColor = "#F00";
+				i++;
+				if(i >= len){
+					clearInterval(timer);
+					setTimeout(function(){
+						nodeStack[i-1].style.backgroundColor = "#FFF";
+						goingFlag = false;
+					},300*speed);
+				}
+
+			},300*speed);
+		}
+
+		function eventAgent(event){
+			if(goingFlag){
+				return;
+			}
+			var rootNode = document.getElementById("root");
+			nodeStack = [];
+			goingFlag = true;
+			if(event && event.target && event.target.type == "button"){
+				speed = sel.value;
+				switch(event.target.value){
+				case "前序":
+					DLR(rootNode);
+					break;
+				case "中序":
+					LDR(rootNode);
+					break;
+				case "后序":
+					LRD(rootNode);
+					break;
+				}
+				animate(speed);
+			}
+		}
+
+		//事件代理,三个按钮的点击事件
+		inDiv.addEventListener('click',eventAgent,false);
+	</script>
+</body>
+</html>
