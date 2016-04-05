@@ -136,13 +136,13 @@
 		}
 
 		function eventAgent(event){
-			if(goingFlag){
-				return;
-			}
 			var rootNode = document.getElementById("root");
-			nodeStack = [];
-			goingFlag = true;
 			if(event && event.target && event.target.type == "button"){
+				if(goingFlag){
+					return;
+				}
+				nodeStack = [];
+				goingFlag = true;
 				speed = sel.value;
 				switch(event.target.value){
 				case "前序":
