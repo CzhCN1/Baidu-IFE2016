@@ -1,6 +1,6 @@
 	var doingFlag = false,
-	      pos_x = 3,		//当前的横坐标
-	      pos_y = 4,		//当前的纵坐标
+	      pos_x = 1,		//当前的横坐标
+	      pos_y = 1,		//当前的纵坐标
 	      dir = [0,90,180,270,360],	//方向列表
 	      dir_now = 0;		//当前的方向下标
 
@@ -173,7 +173,79 @@
 	(function(){
 		var square = document.getElementById('square'),
 		      do_btn = document.getElementById('do'),
-		      move_input = document.getElementById('move');
+		      refresh_btn = document.getElementById('refresh'),
+		      text_input = document.getElementById('textarea'),
+		      row_num = 1;
+
+		//textarea键盘按键被按下
+		text_input.addEventListener('keydown',function(){
+			setTimeout(function(){
+				var content = text_input.value,
+				      nNum;
+				//若未匹配到换行则正则匹配返回NULL，没有length属性
+				//故先判断是否有换行
+				if( content.match(/\n/g) ){
+					nNum = content.match(/\n/g).length;
+				}else{
+					nNum = 0;
+				}
+
+				//行数为换行数+1
+				//判断换行符的数目是否变化
+				if(row_num !==  nNum + 1){
+					//更新行标
+					rowNum(row_num, nNum + 1 );
+					row_num = nNum + 1;
+
+				}else{
+					return;
+				}
+			},0);
+
+		},false);
+
+		//行标更新函数
+		function rowNum(num_before,num_now){
+			var leftCol = document.getElementById("leftCol"),
+			       topValue;
+			while(num_before !== num_now){
+				var pNode;
+				if(num_now < num_before){
+					pNode = leftCol.lastChild;
+					leftCol.removeChild(pNode);
+					num_before--;
+				}else{
+					pNode = document.createElement("p");
+					pNode.innerHTML = num_before + 1;
+					leftCol.appendChild(pNode);
+					num_before++;
+				}
+			}
+
+			if(num_now > 11){
+					topValue =0 - (num_now - 11) * 22 + 8;
+					console.log(topValue);
+					leftCol.style.top = topValue + 'px';
+			}else{
+				leftCol.style.top = 0+'px';
+			}
+		}
+
+		function parseOrder(){
+			var content = text_input.value,
+			      orderLists = [],
+			      numLists = [];
+			orderLists = content.match(/(\w+\s?){1,2}(\d\n?)?/g);
+			/*console.log(orderLists);*/
+			for(var i = 0,len = orderLists.length;i<len;i++){
+				if(orderLists[i].match(/\d/)){
+					numLists[i] = parseInt(orderLists[i].match(/\d/));
+				}else{
+					numLists[i] = 1;
+				}
+			}
+		}
+		parseOrder();
 
 		//执行按钮点击事件
 		do_btn.addEventListener('click',function(){
@@ -185,7 +257,7 @@
 			var square = document.getElementById('square');
 
 			//根据输入执行相应函数
-			switch(move_input.value){
+			switch(1){	//************************************************
 			case "GO":
 		 		positionFoward(dir_now);
 		 		move();
@@ -241,4 +313,10 @@
 				break;
 			}
 		},false);
+
+		//Refresh按钮点击事件
+		refresh_btn.addEventListener('click',function(){
+
+		},false);
+
 	}());
