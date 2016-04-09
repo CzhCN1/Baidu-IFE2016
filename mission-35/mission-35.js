@@ -232,16 +232,32 @@
 		}
 
 		function parseOrder(){
-			var content = text_input.value,
-			      orderLists = [],
-			      numLists = [];
-			orderLists = content.match(/(\w+\s?){1,2}(\d\n?)?/g);
-			/*console.log(orderLists);*/
+			var content = text_input.value,	//textarea内容
+			      leftCol = document.getElementById("leftCol"),
+			      orderLists = [],		//逐行解析的内容
+			      numLists = [],		//每条指令 移动格数
+			      rowOrderLists,		//解析单行指令
+			      orders = ["GO","TUN","TRA","MOV","TOP","RIG","BAC","BOT","LEF"]; //正确的指令条目
+			orderLists = content.split("\n");
+			if(orderLists[orderLists.length - 1] === ""){
+				orderLists.pop();
+			}
 			for(var i = 0,len = orderLists.length;i<len;i++){
 				if(orderLists[i].match(/\d/)){
 					numLists[i] = parseInt(orderLists[i].match(/\d/));
 				}else{
 					numLists[i] = 1;
+				}
+				rowOrderLists = [];
+				rowOrderLists = orderLists[i].match(/([A-Za-z]+)/g);
+				console.log(rowOrderLists);
+				if(rowOrderLists.length>2 || (rowOrderLists[0] == "GO" && rowOrderLists[1])  ){
+					leftCol.getElementsByTagName('p')[i].style.background = '#f00';
+				}
+				for(var j = 0;j<rowOrderLists.length;j++){
+					if(orders.indexOf(rowOrderLists[j]) == -1){
+						leftCol.getElementsByTagName('p')[i].style.background = '#f00';
+					}
 				}
 			}
 		}
