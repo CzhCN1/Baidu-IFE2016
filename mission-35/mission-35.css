@@ -58,6 +58,7 @@ tr:nth-of-type(1) td{
 	line-height: 22px;
 	overflow: hidden;
 	height: 250px;
+	font-family:Microsoft YaHei;
 }
 .leftCol{
 	height: 1000px;
@@ -78,6 +79,7 @@ textarea{
 	resize:none;
 	border: none;
 	font-size: 16px;
+	line-height: 22px;
 }
 
 #square{
