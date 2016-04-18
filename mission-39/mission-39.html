@@ -40,23 +40,37 @@
 		     tab = document.getElementById('tab'),
 		     thRow;
 
-		thRow = addTh();
+		addTh();
 		addTr();
+		thRow = tab.firstChild;
 		document.addEventListener('scroll',sticky,false);
 
 		function sticky(){
-			var top = tab.offsetTop;
-			if(window.scrollY > top){
+			var top = tab.offsetTop,
+			      height = tab.offsetHeight,
+			      mTop = getComputedStyle(tab,null)["margin-top"],
+			      topChange = 0,
+			      sss = 0;
+			//判断是否冻结首行
+			/*console.log(mTop);*/
+			if(window.scrollY > top - sss){
 				thRow.style.position = "fixed";
 				thRow.style.top = "0px";
-			}else if(window.scrollY > (top + config.rowNum * parseInt(config.tdHeight) ) ){
-				thRow.style.display = "none";
-			}
-			else{
+				tab.style.marginTop = "105px";
+				sss = 55;
+				console.log(1);
+			}else{
 				thRow.style.position = "static";
-				/*thRow.style.display = "block";*/
+				tab.style.marginTop = "50px";
+				console.log(2);
 			}
-			console.log(window.scrollY +':'+(top + config.rowNum * parseInt(config.tdHeight)));
+			//判断是否显示首行
+			if(window.scrollY > (top + height ) ){
+				thRow.style.display = "none";
+			}else{
+				thRow.style.display = "";
+			}
+
 		}
 
 		function addTh(){
@@ -74,6 +88,15 @@
 				addArrowDown(tdList[i]);
 			}
 			tab.appendChild(thNode);
+
+
+			//由于第一行元素fixed定位后脱离文档流
+			//所以添加一个空行来撑起原位置，通常不显示
+			//当首行定位后显示
+	/*		thNode = document.createElement('tr');
+			thNode.style.display = "none";
+			thNode.style.height = config.tdHeight;
+			tab.appendChild(thNode);*/
 
 			function addArrow(divNode,flag){
 				divNode.style.width = "0px";
@@ -159,7 +182,6 @@
 				divNode.style.top = "14px";
 				tdNode.appendChild(divNode);
 			}
-			return thNode;
 		}
 		function addTd(rowNode,contentList){
 			var tdNode;
