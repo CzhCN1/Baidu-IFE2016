@@ -1,0 +1,51 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+
+/*UI_table*/
+.UI_table{
+	text-align : center;
+	border-collapse : collapse;
+}
+
+.UI_table tr>td{
+	width: 150px;
+	height: 55px;
+	border: 1px solid #CCC;
+}
+
+/*th style */
+.UI_table tr:first-child{
+	background-color: #333;
+	color: #fff;
+	font-weight: bold;
+	z-index: 1;
+}
+
+.UI_table tr:first-child>td{
+	position: relative;
+	font
+}
+
+.UI_table tr:first-child>td .arrow{
+	width: 0;
+	height: 0;
+	border-left : 8px solid transparent;
+	border-right : 8px solid transparent;
+	cursor : pointer;
+}
+.UI_table tr:first-child>td .arrowUp{
+	border-bottom :10px solid #fff;
+}
+.UI_table tr:first-child>td .arrowDown{
+	border-top :10px solid #fff;
+	margin-top: 5px;
+}
+.UI_table tr:first-child>td .arrowWrap{
+	position: absolute;
+	top: 50%;
+	right: 10px;
+	margin-top:-13px;
+	height: 26px;
+}
