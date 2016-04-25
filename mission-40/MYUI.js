@@ -212,8 +212,8 @@ var MYUI = (function(){
 	////**********************************************************************************
 	var calendar = (function(){
 		var config = {},
-			myDate = new Date(),
-			monthList = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+			myDate = new Date();
+
 		//实例化一个calendar对象
 		function init(opts){
 			return new Calendar(opts);
@@ -222,15 +222,20 @@ var MYUI = (function(){
 		//Calendar构造函数
 		function Calendar(opts) {
 			config = this.parseOpts(opts);
+			this.createYearList();
+			this.addCalendar();
+			this.addHeader();
 		}
 
 		//Calendar 原型
 		Calendar.prototype = {
 			defaultOpts : {
+				monthList:["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],
 				yearStart:1970,
 				yearEnd:2020,
 				yearNow : myDate.getFullYear(),
-				monthNow : monthList[myDate.getMonth()],
+				monthNow : myDate.getMonth(),
+				monthDay:[31,null,31,30,31,30,31,31,30,31,30,31],
 			},
 			parseOpts : function(opts){
 				for(var key in this.defaultOpts){
@@ -242,30 +247,157 @@ var MYUI = (function(){
 			},
 			//添加class修改整体样式
 			addCalendar : function(){
-				var calendar = document.getElementById(this.defaultOpts.calId);
-				calendar.className += "UI_calendar";
+				var calendar = document.getElementById(config.calId);
+				calendar.className += ' '+"UI_calendar";
 			},
 			//添加日历的头部(月份,年的选择)
 			addHeader : function(){
-				var calendar = document.getElementById(this.defaultOpts.calId),
-				    nDiv = document.createElement('div');
-				nDiv.className += "header";
-				nDiv = addMonthSelect(nDiv);
-
+				var calendar = document.getElementById(config.calId),  //日历组件
+				    nDiv = document.createElement('div');	//div.header
+				nDiv.className += ' '+"header";
+				nDiv.appendChild(addMonthSelect());
+				nDiv.appendChild(addYearSelect());
 				calendar.appendChild(nDiv);
-				function addMonthSelect(pNode){
-					var nNode = document.createElement('div');
-					nNode.className += "month";
-					
-				}
-				function addYearSelect(){
+				//点击隐藏弹出框
+				document.addEventListener('click',clickHidden,false);
+				/**
+				 * [addMonthSelect 生成monthSelect节点并返回]
+				 * return : monthSelect节点
+				 */
+				function addMonthSelect(){
+					var nMonth = document.createElement('div'),
+						nMonthShow = document.createElement('div');
+					nMonth.className += ' '+"month";
+					nMonthShow.innerHTML = config.monthList[config.monthNow];
+					nMonthShow.className += ' '+"monthShow";
+					nMonthShow.id = "monthShow";
+					nMonth.appendChild(nMonthShow);
+					nMonth.appendChild(addArrow(config.monthList));
+					nMonth.appendChild(addHidden(config.monthList));
 
+					nMonthShow.addEventListener('click',function(eve){
+						var divHidden = eve.target.nextSibling.nextSibling;
+						divHidden.style.display = 'block';
+						eve.stopPropagation();
+					},false);
+
+					return nMonth;
+				}
+				/**
+				 * [addMonthSelect 生成yearSelect节点并返回]
+				 * return : yearSelect节点
+				 */
+				function addYearSelect(){
+					var nYear = document.createElement('div'),
+						nYearShow = document.createElement('div');
+					nYear.className += ' '+"year";
+					nYearShow.innerHTML = config.yearNow;
+					nYearShow.className += ' '+"yearShow";
+					nYearShow.id = "yearShow";
+					nYear.appendChild(nYearShow);
+					nYear.appendChild(addArrow(config.yearList));
+					nYear.appendChild(addHidden(config.yearList));
+
+					nYearShow.addEventListener('click',function(eve){
+						var divHidden = eve.target.nextSibling.nextSibling;
+						divHidden.style.display = 'block';
+						eve.stopPropagation();
+					},false);
+					return nYear;
+				}
+
+				/**
+				 * [addArrow 添加箭头节点并绑定事件]
+				 */
+				function addArrow(list){
+					var arrowWrap = document.createElement('div'),
+						arrowUp = document.createElement('div'),
+						arrowDown = document.createElement('div');
+					arrowWrap.className += ' '+"arrowWrap";
+					arrowUp.className += ' '+"arrowUp arrow";
+					arrowDown.className += ' '+"arrowDown arrow";
+					arrowWrap.appendChild(arrowUp);
+					arrowWrap.appendChild(arrowDown);
+					
+					arrowUp.addEventListener('click',function(eve){
+						var divShow = eve.target.parentNode.previousSibling,
+							nowIndex = list.indexOf(divShow.innerHTML);
+						if(list == config.yearList){
+							nowIndex = list.indexOf(parseInt(divShow.innerHTML));
+						}
+						if(list[nowIndex-1]){
+							divShow.innerHTML = list[nowIndex-1];
+						}
+					},false);
+					arrowDown.addEventListener('click',function(eve){
+						var divShow = eve.target.parentNode.previousSibling,
+							nowIndex = list.indexOf(divShow.innerHTML);
+						if(list == config.yearList){
+							nowIndex = list.indexOf(parseInt(divShow.innerHTML));
+						}
+						if(list[nowIndex+1]){
+							divShow.innerHTML = list[nowIndex+1];
+						}
+					},false);
+
+					return arrowWrap;
+				}
+				function addHidden(list){
+					var divHidden = document.createElement('div');
+					divHidden.className += "hidden";
+					for(var i=0,len = list.length;i<len;i++){
+						var nOpt = document.createElement('option');
+						nOpt.innerHTML = list[i];
+						divHidden.appendChild(nOpt);
+					}
+
+					divHidden.addEventListener('click',function(eve){
+						var content,
+							divShow;
+						if(eve.target.nodeName == "OPTION"){
+							content = eve.target.innerHTML;
+							divShow = divHidden.previousSibling.previousSibling;
+							divShow.innerHTML = content;
+							createDayList();
+						}
+					},false);
+
+					return divHidden;
+				}
+				function clickHidden(){
+					var childList = calendar.getElementsByTagName('*');
+					for(var i = 0; i<childList.length; i+=1){
+						if(childList[i].className === "hidden"){
+							childList[i].style.display = "none";
+						}
+					}
+				}
+				//生成日期列表
+				function createDayList(){
+					var chosMonth = config.monthList.indexOf(document.getElementById('monthShow').innerHTML),
+						chosYear = parseInt(document.getElementById('yearShow').innerHTML),
+						newDate = new Date(chosYear,chosMonth);
+
+					console.log(isLeapYear());
+
+					//判断是否是闰年
+					function isLeapYear(){
+						return (chosYear % 400 === 0 || (chosYear % 4 === 0 && chosYear % 100 !==0));
+					}
 				}
 			},
 			//添加日历的日期
 			addDays : function(){
 
-			}
+			},
+			//生成年份列表
+			createYearList : function() {
+				var yearList = [];
+				for(var i = config.yearStart,j = config.yearEnd;i<=j;i++){
+					yearList.push(i);
+				}
+				config.yearList = yearList;
+			},
 		};
 
 		//return API
