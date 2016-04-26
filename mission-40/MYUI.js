@@ -212,7 +212,8 @@ var MYUI = (function(){
 	////**********************************************************************************
 	var calendar = (function(){
 		var config = {},
-			myDate = new Date();
+			myDate = new Date(),
+			that;
 
 		//实例化一个calendar对象
 		function init(opts){
@@ -222,9 +223,15 @@ var MYUI = (function(){
 		//Calendar构造函数
 		function Calendar(opts) {
 			config = this.parseOpts(opts);
+			that = this;
+
 			this.createYearList();
 			this.addCalendar();
 			this.addHeader();
+			this.createDayList();
+			this.addDays();
+			this.updateDays();
+			that.updateInput();
 		}
 
 		//Calendar 原型
@@ -236,6 +243,10 @@ var MYUI = (function(){
 				yearNow : myDate.getFullYear(),
 				monthNow : myDate.getMonth(),
 				monthDay:[31,null,31,30,31,30,31,31,30,31,30,31],
+				weekDay :['Su','Mo','Tu','We','Th','Fr','Sa'],
+				dayList :[],
+				dayClassList:[],
+				hiddenFlag : false,
 			},
 			parseOpts : function(opts){
 				for(var key in this.defaultOpts){
@@ -249,6 +260,22 @@ var MYUI = (function(){
 			addCalendar : function(){
 				var calendar = document.getElementById(config.calId);
 				calendar.className += ' '+"UI_calendar";
+				if(config.hiddenFlag){
+					calendar.style.display = "none";
+					var input = document.getElementById(config.inputId);
+					input.className += ' '+"UI_calendarInput";
+					input.addEventListener('click',function(eve){
+						calendar.style.display = "";
+						eve.stopPropagation();
+					},false);
+					calendar.addEventListener('click',function(eve){
+						eve.stopPropagation();
+					},false);
+					document.addEventListener('click',function(eve){
+						calendar.style.display = "none";
+					},false);
+				}
+
 			},
 			//添加日历的头部(月份,年的选择)
 			addHeader : function(){
@@ -328,6 +355,7 @@ var MYUI = (function(){
 						if(list[nowIndex-1]){
 							divShow.innerHTML = list[nowIndex-1];
 						}
+						that.updateCalendar();
 					},false);
 					arrowDown.addEventListener('click',function(eve){
 						var divShow = eve.target.parentNode.previousSibling,
@@ -338,6 +366,7 @@ var MYUI = (function(){
 						if(list[nowIndex+1]){
 							divShow.innerHTML = list[nowIndex+1];
 						}
+						that.updateCalendar();
 					},false);
 
 					return arrowWrap;
@@ -358,7 +387,7 @@ var MYUI = (function(){
 							content = eve.target.innerHTML;
 							divShow = divHidden.previousSibling.previousSibling;
 							divShow.innerHTML = content;
-							createDayList();
+							that.updateCalendar();
 						}
 					},false);
 
@@ -372,23 +401,38 @@ var MYUI = (function(){
 						}
 					}
 				}
-				//生成日期列表
-				function createDayList(){
-					var chosMonth = config.monthList.indexOf(document.getElementById('monthShow').innerHTML),
-						chosYear = parseInt(document.getElementById('yearShow').innerHTML),
-						newDate = new Date(chosYear,chosMonth);
-
-					console.log(isLeapYear());
-
-					//判断是否是闰年
-					function isLeapYear(){
-						return (chosYear % 400 === 0 || (chosYear % 4 === 0 && chosYear % 100 !==0));
-					}
-				}
 			},
 			//添加日历的日期
 			addDays : function(){
-
+				var calendar = document.getElementById(config.calId),  //日历组件
+					nDays = document.createElement('div'),
+					nTable = document.createElement('table');
+				nDays.className += ' '+ "days";
+				nTable.id = "dayTable";
+				nTable.appendChild(addWeek());
+				for(var i = 0;i<6;i++){
+					nTable.appendChild(addDay(i));
+				}
+				nDays.appendChild(nTable);
+				calendar.appendChild(nDays);
+				function addWeek(){
+					var nTr = document.createElement('tr');
+					for(var i =0;i<7;i++){
+						var nTd = document.createElement('td');
+						nTd.innerHTML = config.weekDay[i];
+						nTr.appendChild(nTd);
+					}
+					return nTr;
+				}
+				function addDay(num){
+					var nTr = document.createElement('tr');
+					nTr.id = "tr"+(num+1);
+					for(var i=0+num*7,len=(1+num)*7;i<len;i++){
+						var nTd = document.createElement('td');
+						nTr.appendChild(nTd);
+					}
+					return nTr;
+				}
 			},
 			//生成年份列表
 			createYearList : function() {
@@ -397,6 +441,116 @@ var MYUI = (function(){
 					yearList.push(i);
 				}
 				config.yearList = yearList;
+			},
+			//生成日期列表
+			createDayList :	function(){
+				//chosMonth : 0~11
+				var chosMonth = config.monthList.indexOf(document.getElementById('monthShow').innerHTML),
+					chosYear = parseInt(document.getElementById('yearShow').innerHTML),
+					newDate = new Date(chosYear,chosMonth),
+					preMonth,
+					nextMonth,
+					dayList = [],
+					dayClassList = [];
+				//判断是否为闰年，确定二月天数
+				if(chosMonth == 1 && isLeapYear()){
+					config.monthDay[1] = 29;
+				}
+				else{
+					config.monthDay[1] = 28;
+				}
+				//判断上个月与下个月
+				if(chosMonth === 0){
+					preMonth = 11;
+					nextMonth = 1;
+				}else if(nextMonth === 11){
+					preMonth = 10;
+					nextMonth = 0;
+				}else{
+					preMonth = chosMonth-1;
+					nextMonth = chosMonth+1;
+				}
+				//上个月余下的天数
+				var i,
+					len = newDate.getDay();
+				if(len === 0){
+					len = 7;
+				}
+				for(i = 0;i<len;i++){
+					dayList.push(config.monthDay[preMonth]-len+i+1);
+					dayClassList.push("preThisMonth");
+				}
+				//这个月的天数
+				for(i = 0,len = config.monthDay[chosMonth];i<len;i++){
+					dayList.push(i+1);
+					dayClassList.push("isThisMonth");
+				}
+				//下个月的天数
+				var j;
+				for(i = dayList.length,j = 1;i<42;i++,j++){
+					dayList.push(j);
+					dayClassList.push("nextThisMonth");
+				}
+				config.dayList = dayList;
+				config.dayClassList = dayClassList;
+				//判断是否是闰年
+				function isLeapYear(){
+					return (chosYear % 400 === 0 || (chosYear % 4 === 0 && chosYear % 100 !==0));
+				}
+			},
+			updateDays : function(){
+				var idList = ["tr1","tr2","tr3","tr4","tr5","tr6"],
+					nTr,
+					tdList;
+				for(var i =0;i<6;i++){
+					nTr = document.getElementById(idList[i]);
+					tdList = nTr.getElementsByTagName('td');
+					for(var j =0;j<7;j++){
+						tdList[j].innerHTML = config.dayList[i*7+j];
+						tdList[j].className =config.dayClassList[i*7+j];
+					}
+				}
+			},
+			updateCalendar : function(){
+				that.createDayList();
+				that.updateDays();
+			},
+			updateInput : function(){
+				var dayTable = document.getElementById("dayTable");
+				dayTable.addEventListener('click',function(eve){
+					var yearShow = document.getElementById('yearShow').innerHTML,
+						monthShow = document.getElementById('monthShow'),
+						month = config.monthList.indexOf(monthShow.innerHTML)+1,
+						day,
+						str = "",
+						input = document.getElementById(config.inputId),
+						nTd = eve.target;
+					if(nTd.className !== "isThisMonth"){
+						if(nTd.className == "preThisMonth"){
+						/**
+						 *
+						 *	边界检测
+						 *  重新赋值monthShow，刷新日期
+						 *  刷新input内容  
+						 *
+						 *
+						 */
+						}else if(nTd.className == "nextThisMonth"){
+
+						}
+					}
+					if(eve.target.nodeName == "TD"){
+						day = eve.target.innerHTML;
+						if(parseInt(month)<10){
+							month = "0"+ month;
+						}
+						if(parseInt(day)<10){
+							day = "0"+ day;
+						}
+						str += yearShow.innerHTML+"-"+month+"-"+day;
+						input.value = str;
+					}
+				},false);
 			},
 		};
 
