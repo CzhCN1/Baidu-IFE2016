@@ -1,5 +1,10 @@
 var MYUI = (function(){
-	//  sub-unit Table
+
+	//**********************************************************************************
+	//**********************************************************************************
+	//										表格组件
+	//**********************************************************************************
+	//**********************************************************************************
 	var table =(function(){
 		//save config options
 		var config;
@@ -206,10 +211,11 @@ var MYUI = (function(){
 	}());
 
 
-	
+	//**********************************************************************************
 	//**********************************************************************************
 	//										日历组件
-	////**********************************************************************************
+	//**********************************************************************************
+	//**********************************************************************************
 	var calendar = (function(){
 		var config = {},
 			myDate = new Date(),
@@ -225,13 +231,14 @@ var MYUI = (function(){
 			config = this.parseOpts(opts);
 			that = this;
 
-			this.createYearList();
-			this.addCalendar();
-			this.addHeader();
-			this.createDayList();
-			this.addDays();
-			this.updateDays();
-			that.updateInput();
+			this.createYearList();		//根据配置信息计算年份列表
+			this.addCalendar();			//创建日历，添加样式class，绑定日历点击显示隐藏的事件
+			this.addHeader();			//创建日历头部分
+			this.createDayList();		//根据日历头选项生成本月的日期列表
+			this.addDays();				//添加日期列表td节点
+			this.updateDays();			//刷新日历内容
+			this.selectDay();			//添加日期单击选择的事件
+
 		}
 
 		//Calendar 原型
@@ -247,6 +254,7 @@ var MYUI = (function(){
 				dayList :[],
 				dayClassList:[],
 				hiddenFlag : false,
+				inputValue : myDate.getFullYear()+'-'+myDate.getMonth()+'-'+myDate.getDate(),
 			},
 			parseOpts : function(opts){
 				for(var key in this.defaultOpts){
@@ -256,28 +264,39 @@ var MYUI = (function(){
 				}
 				return opts;
 			},
-			//添加class修改整体样式
+			/**
+			 * [addCalendar 添加class修改整体样式,为input添加点击事件]
+			 */
 			addCalendar : function(){
 				var calendar = document.getElementById(config.calId);
+				//为日历div添加class
 				calendar.className += ' '+"UI_calendar";
+				//判断是否隐藏日历
 				if(config.hiddenFlag){
+					//隐藏日历显示
 					calendar.style.display = "none";
+					//与日历绑定的输入框
 					var input = document.getElementById(config.inputId);
 					input.className += ' '+"UI_calendarInput";
+					//点击输入框弹出日历
 					input.addEventListener('click',function(eve){
 						calendar.style.display = "";
 						eve.stopPropagation();
 					},false);
+					//阻止日历上点击事件的冒泡
 					calendar.addEventListener('click',function(eve){
 						eve.stopPropagation();
 					},false);
+					//点击页面其他部位隐藏日历
 					document.addEventListener('click',function(eve){
 						calendar.style.display = "none";
 					},false);
 				}
 
 			},
-			//添加日历的头部(月份,年的选择)
+			/**
+			 * [addHeader 添加日历的头部(月份,年的选择)]
+			 */
 			addHeader : function(){
 				var calendar = document.getElementById(config.calId),  //日历组件
 				    nDiv = document.createElement('div');	//div.header
@@ -356,6 +375,7 @@ var MYUI = (function(){
 							divShow.innerHTML = list[nowIndex-1];
 						}
 						that.updateCalendar();
+						that.loadSelectDay();
 					},false);
 					arrowDown.addEventListener('click',function(eve){
 						var divShow = eve.target.parentNode.previousSibling,
@@ -367,10 +387,15 @@ var MYUI = (function(){
 							divShow.innerHTML = list[nowIndex+1];
 						}
 						that.updateCalendar();
+						that.loadSelectDay();
 					},false);
 
 					return arrowWrap;
 				}
+				/**
+				 * [addHidden 添加隐藏的选择列表]
+				 * @param {[type]} list [选项列表]
+				 */
 				function addHidden(list){
 					var divHidden = document.createElement('div');
 					divHidden.className += "hidden";
@@ -379,7 +404,7 @@ var MYUI = (function(){
 						nOpt.innerHTML = list[i];
 						divHidden.appendChild(nOpt);
 					}
-
+					//为隐藏列表添加点击事件
 					divHidden.addEventListener('click',function(eve){
 						var content,
 							divShow;
@@ -387,13 +412,20 @@ var MYUI = (function(){
 							content = eve.target.innerHTML;
 							divShow = divHidden.previousSibling.previousSibling;
 							divShow.innerHTML = content;
-							that.updateCalendar();
+							that.updateCalendar();	//更新日历
+							clickHidden();			//点击选项后隐藏列表
+							that.loadSelectDay();	//读取已选择的日期
 						}
 					},false);
 
 					return divHidden;
 				}
+				/**
+				 * [clickHidden 点击隐藏]
+				 * @return {[type]} [description]
+				 */
 				function clickHidden(){
+					//寻找class="hidden"的节点 改变display属性为hidden
 					var childList = calendar.getElementsByTagName('*');
 					for(var i = 0; i<childList.length; i+=1){
 						if(childList[i].className === "hidden"){
@@ -402,7 +434,9 @@ var MYUI = (function(){
 					}
 				}
 			},
-			//添加日历的日期
+			/**
+			 * [addDays 添加日历的日期部分]
+			 */
 			addDays : function(){
 				var calendar = document.getElementById(config.calId),  //日历组件
 					nDays = document.createElement('div'),
@@ -415,6 +449,10 @@ var MYUI = (function(){
 				}
 				nDays.appendChild(nTable);
 				calendar.appendChild(nDays);
+
+				/**
+				 * [addWeek 添加第一行星期]
+				 */
 				function addWeek(){
 					var nTr = document.createElement('tr');
 					for(var i =0;i<7;i++){
@@ -422,8 +460,13 @@ var MYUI = (function(){
 						nTd.innerHTML = config.weekDay[i];
 						nTr.appendChild(nTd);
 					}
+					nTr.className += "week";
 					return nTr;
 				}
+				/**
+				 * [addDay 添加日期节点]
+				 * @param {[type]} num [生成第几行日期]
+				 */
 				function addDay(num){
 					var nTr = document.createElement('tr');
 					nTr.id = "tr"+(num+1);
@@ -453,7 +496,7 @@ var MYUI = (function(){
 					dayList = [],
 					dayClassList = [];
 				//判断是否为闰年，确定二月天数
-				if(chosMonth == 1 && isLeapYear()){
+				if(isLeapYear()){
 					config.monthDay[1] = 29;
 				}
 				else{
@@ -498,6 +541,10 @@ var MYUI = (function(){
 					return (chosYear % 400 === 0 || (chosYear % 4 === 0 && chosYear % 100 !==0));
 				}
 			},
+			/**
+			 * [updateDays 更新日期节点的内容,并添加class]
+			 * @return {[type]} [description]
+			 */
 			updateDays : function(){
 				var idList = ["tr1","tr2","tr3","tr4","tr5","tr6"],
 					nTr,
@@ -511,46 +558,139 @@ var MYUI = (function(){
 					}
 				}
 			},
+			/**
+			 * [updateCalendar 更新日历]
+			 * @return {[type]} [description]
+			 */
 			updateCalendar : function(){
-				that.createDayList();
-				that.updateDays();
+				that.createDayList();	//根据新的选项生成本月的日期列表
+				that.updateDays();		//更新日期的显示
+				that.removeAttr();		//移除被选中的样式class
 			},
-			updateInput : function(){
-				var dayTable = document.getElementById("dayTable");
-				dayTable.addEventListener('click',function(eve){
-					var yearShow = document.getElementById('yearShow').innerHTML,
-						monthShow = document.getElementById('monthShow'),
-						month = config.monthList.indexOf(monthShow.innerHTML)+1,
-						day,
-						str = "",
-						input = document.getElementById(config.inputId),
-						nTd = eve.target;
-					if(nTd.className !== "isThisMonth"){
-						if(nTd.className == "preThisMonth"){
-						/**
-						 *
-						 *	边界检测
-						 *  重新赋值monthShow，刷新日期
-						 *  刷新input内容  
-						 *
-						 *
-						 */
-						}else if(nTd.className == "nextThisMonth"){
+			/**
+			 * [updateInput 更新Input输入框的值]
+			 * @param  {[type]} year  [选中日期的年份]
+			 * @param  {[type]} month [选中日期的月份]
+			 * @param  {[type]} day   [选中日期的日子]
+			 * @return {[type]}       [description]
+			 */
+			updateInput : function(year,month,day){
+				var input = document.getElementById(config.inputId),
+					str = "";
 
+				if(parseInt(month)<10){
+					month = "0"+ month;
+				}
+				if(parseInt(day)<10){
+					day = "0"+ day;
+				}
+				str += year+"-"+month+"-"+day;
+
+				input.value = str;
+				config.inputValue = str;	//保存已选日期至config
+			},
+			/**
+			 * [selectDay 单击选择日期的事件]
+			 * @return {[type]} [description]
+			 */
+			selectDay : function(){
+				var dayTable = document.getElementById("dayTable");
+
+				//事件代理 Table代理所有Td节点的点击事件
+				dayTable.addEventListener('click',function(eve){
+					var yearShow = document.getElementById('yearShow'),
+						monthShow = document.getElementById('monthShow'),
+						input = document.getElementById(config.inputId),
+						nTd = eve.target,
+						selectDay = nTd.innerHTML;
+					//判断点击目标是否是td节点
+					if(nTd.nodeName == "TD" && nTd.className !== ""){
+						//移除已选择节点的样式
+						that.removeAttr();
+						//如果点击了非本月的日期
+						if(nTd.className !== "isThisMonth"){
+							var posYear = config.yearList.indexOf(parseInt(yearShow.innerHTML)),
+								posMonth = config.monthList.indexOf(monthShow.innerHTML);
+							//如果点击了前一个月的日期
+							if(nTd.className == "preThisMonth"){
+								if(posMonth !== 0){
+									posMonth--;
+								}else{
+									if(posYear !== 0){
+										posYear--;
+										posMonth = 11;
+									}
+								}
+							//如果点击了下一个月的日期
+							}else if(nTd.className == "nextThisMonth"){
+								if(posMonth !== 11){
+									posMonth++;
+								}else{
+									if(posYear !== config.yearList.length-1){
+										posYear++;
+										posMonth = 0;
+									}
+								}
+							}
+							//更新日历头部的选项显示
+							yearShow.innerHTML = config.yearList[posYear];
+							monthShow.innerHTML = config.monthList[posMonth];
+							
+							that.updateCalendar();		//更新日历
+							that.addAttr(selectDay);	//添加点击日期的样式
+						//选择了当月的日期
+						}else{
+							//为该节点添加选择后的样式
+							nTd.setAttribute("select","selected");
 						}
-					}
-					if(eve.target.nodeName == "TD"){
-						day = eve.target.innerHTML;
-						if(parseInt(month)<10){
-							month = "0"+ month;
-						}
-						if(parseInt(day)<10){
-							day = "0"+ day;
-						}
-						str += yearShow.innerHTML+"-"+month+"-"+day;
-						input.value = str;
+						//日期输入框内容更新
+						that.updateInput(yearShow.innerHTML,config.monthList.indexOf(monthShow.innerHTML)+1,selectDay);
 					}
 				},false);
+			},
+			/**
+			 * [removeAttr 移除已选择日期的样式]
+			 * @return {[type]} [description]
+			 */
+			removeAttr : function(){
+				var pNode = document.getElementById("dayTable"),
+					tagName = 'td',
+					attrName = 'select',
+					nList = (pNode?pNode:document).getElementsByTagName((tagName?tagName:'*'));
+				for(var i=0,len = nList.length;i<len;i++){
+					if(nList[i].hasAttribute(attrName)){
+						nList[i].removeAttribute(attrName);
+					}
+				}
+			},
+			/**
+			 * [addAttr 为已选择的日期添加样式]
+			 * @param {[type]} dayNum [description]
+			 */
+			addAttr : function(dayNum){
+				var pNode = document.getElementById("dayTable"),
+					tagName = 'td',
+					attrName = 'select',
+					nList = (pNode?pNode:document).getElementsByTagName((tagName?tagName:'*'));
+				for(var i=0,len = nList.length;i<len;i++){
+					if(nList[i].innerHTML == dayNum && nList[i].className == "isThisMonth"){
+						nList[i].setAttribute("select","selected");
+					}
+				}
+			},
+			/**
+			 * [loadSelectDay 读取已选择的日期，判断该日期是否出现在当前日历中，若出现则添加已选择的样式]
+			 * @return {[type]} [description]
+			 */
+			loadSelectDay : function(){
+				var parseDay = config.inputValue.split('-'),
+					monthShow = document.getElementById("monthShow"),
+					yearShow = document.getElementById("yearShow");
+				//如果是已选择日期的当前月和当前年
+				if(yearShow.innerHTML == parseDay[0] && monthShow.innerHTML == config.monthList[parseInt(parseDay[1])-1]){
+					//为该节点添加已选择样式
+					that.addAttr(parseInt(parseDay[2]));
+				}
 			},
 		};
 
