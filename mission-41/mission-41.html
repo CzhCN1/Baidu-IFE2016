@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Extra mission-41</title>
+	<link rel="stylesheet" href="MYUI.css">
+	<style>
+		#calendar{
+			margin: 0px 0 0 100px;
+		}
+		#calInput{
+			width: 100px;
+			height: 30px;
+			margin-top: 100px;
+			margin-left: 100px;
+		}
+	</style>
+</head>
+<body>
+	<input type="text" id="calInput">
+	<div id="calendar"></div>
+
+	<script src="MYUI.js"></script>
+	<script>
+		var cla = MYUI.calendar.init({
+			calId : "calendar",		//日历元素节点的ID
+			inputId : "calInput",	//与日历绑定输入框的ID
+			hiddenFlag : true,		//是否隐藏日历
+			selectHiddenFlag:false,	//选择日期后是否隐藏日历
+			yearStart:2000,			//起始年份
+			yearEnd:2020,			//结束年份
+			selectCallback : doSomething,//选择日期后执行的回调
+		});
+		//选择日期后的回调
+		function doSomething(){
+			var calInput = document.getElementById('calInput');
+			alert(calInput.value);
+		}
+	</script>
+</body>
+</html>

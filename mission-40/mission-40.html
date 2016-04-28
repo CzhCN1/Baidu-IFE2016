@@ -26,9 +26,16 @@
 			calId : "calendar",		//日历元素节点的ID
 			inputId : "calInput",	//与日历绑定输入框的ID
 			hiddenFlag : true,		//是否隐藏日历
+			selectHiddenFlag:false,	//选择日期后是否隐藏日历
 			yearStart:2000,			//起始年份
 			yearEnd:2020,			//结束年份
+			selectCallback : doSomething,//选择日期后执行的回调
 		});
+		//选择日期后的回调
+		function doSomething(){
+			var calInput = document.getElementById('calInput');
+			alert(calInput.value);
+		}
 	</script>
 </body>
 </html>

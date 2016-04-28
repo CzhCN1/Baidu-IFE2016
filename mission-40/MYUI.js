@@ -645,6 +645,14 @@ var MYUI = (function(){
 						}
 						//日期输入框内容更新
 						that.updateInput(yearShow.innerHTML,config.monthList.indexOf(monthShow.innerHTML)+1,selectDay);
+						
+						//隐藏日历表单
+						if(config.selectHiddenFlag){
+							document.getElementById(config.calId).style.display = "none";
+						}
+		
+						//执行回调
+						that.callBack();
 					}
 				},false);
 			},
@@ -692,6 +700,11 @@ var MYUI = (function(){
 					that.addAttr(parseInt(parseDay[2]));
 				}
 			},
+			callBack : function(){
+				if(config.selectCallback){
+					config.selectCallback();
+				}
+			}
 		};
 
 		//return API
