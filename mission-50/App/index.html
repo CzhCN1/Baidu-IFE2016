@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Extra Questionnaire Website</title>
+
+	<link rel="stylesheet" href="lib/bower_components/bootstrap/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/MYUI.css">
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+			list-style: none;
+			font-family: SimHei;
+		}
+		body{
+			background: #DDD;
+		}
+		nav{
+			height: 85px;
+			background-color: #5CACEE;
+			line-height: 85px;
+			color: #FFF;
+		}
+		nav .icon{
+			font-size: 30px;
+		}
+		nav a{
+			font-size: 20px;
+		}
+		nav a:link{color:#FFF;text-decoration: none;}
+		nav a:visited{color:#FFF;text-decoration: none;}
+		nav a:hover{color:#FFF;text-decoration: none;}
+		nav a:active{color:#FFF;text-decoration: none;}
+
+		.wrap{
+			margin-top: 80px;
+			background: #fff;
+		}
+		.wrap #tableList{
+			margin-top: 10px;
+		}
+		#tableList button{
+			padding:0px 5px;
+			margin: 0 5px;
+		}
+		#tableList input{
+			margin-left: 20px;
+		}
+		.all{
+			text-indent: 28px;
+			margin-bottom: 10px;
+		}	
+		.all button{
+			padding:0px 5px;
+			margin: 0 5px;
+		}
+	</style>
+</head>
+<body>
+	<nav class="col-md-12">
+		<div class="icon col-md-3 col-md-offset-1">
+			<i><img src="img/logo.png" alt=""></i>
+			问卷管理
+		</div>
+		<ul>
+			<li><a href="#">我的问卷</a></li>
+		</ul>
+	</nav>
+
+	<form class="wrap col-md-8 col-md-offset-2">
+		<table class="table table-hover" id="tableList">
+			<tr>
+				<td></td>
+				<td>标题</td>
+				<td>时间</td>
+				<td>状态</td>
+				<td>操作</td>
+			</tr>
+			<tr>
+				<td><input type="radio" name="select" value="1"></td>
+				<td>这是第一份问卷</td>
+				<td>2016-5-4 17:11:06</td>
+				<td>发布中</td>
+				<td><button>编辑</button><button>删除</button><button>查看</button></td>
+			</tr>
+			<tr>
+				<td><input type="radio" name="select" value="2"></td>
+				<td>这是第一份问卷</td>
+				<td>2016-5-4 17:11:06</td>
+				<td>发布中</td>
+				<td><button>编辑</button><button>删除</button><button>查看</button></td>
+			</tr>
+			<tr>
+				<td><input type="radio" name="select" value="3"></td>
+				<td>这是第一份问卷</td>
+				<td>2016-5-4 17:11:06</td>
+				<td>发布中</td>
+				<td><button>编辑</button><button>删除</button><button>查看</button></td>
+			</tr>
+		</table>
+		<div class="all">
+			<input  type="radio" name="select">全选
+			<button class="delateBtn">删除</button>
+		</div>
+	</form>
+	
+
+	<script src="lib/bower_components/jquery/dist/jquery.min.js"></script>
+	<script src="lib/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script src="js/MYUI.js"></script>
+</body>
+</html>

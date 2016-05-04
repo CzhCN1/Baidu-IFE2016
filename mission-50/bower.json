@@ -1,0 +1,21 @@
+{
+  "name": "questionnaire",
+  "authors": [
+    "CzhCN1 <2021525982@qq.com>"
+  ],
+  "description": "online questionnaire website",
+  "main": "",
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^2.2.3"
+  }
+}
