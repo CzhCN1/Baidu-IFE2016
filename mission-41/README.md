@@ -1,7 +1,7 @@
 # 一个简单的UI库
 　　利用原型模式创立一个小型的UI代码库，包括表格组件和日历组件的自动生成。
 ## 表格组件
-###[demo](gentlemanczh.com/works/Baidu_IFE/mission-39/)
+###[demo](http://gentlemanczh.com/works/Baidu_IFE/mission-39/)
 1. 提供生成表格的接口，表格中的数据，表格样式低耦合。
 2. 可以配置对哪些列支持排序功能，并在表头进行排序按钮的显示。
 3. 提供点击排序按钮后的响应接口，并提供默认的排序方法，当提供的接口没有具体实现时，按默认的排序方法进行排序操作，并更新表格中的数据显示。
@@ -21,7 +21,7 @@
 			thStickyFlag : true,
 		});  
 ## 日历组件  
-###[demo](gentlemanczh.com/works/Baidu_IFE/mission-41/)
+###[demo](http://gentlemanczh.com/works/Baidu_IFE/mission-41/)
 
 2. 通过某种方式选择年、月，选择了年月后，日期列表做相应切换。
 3. 通过单击某个具体的日期进行日期选择。

@@ -1,5 +1,5 @@
 #听指令的小方块
-##[demo](gentlemanczh.com/works/Baidu_IFE/mission-35/)
+##[demo](http://gentlemanczh.com/works/Baidu_IFE/mission-35/)
 ##预实现功能
 1. 命令输入框由input变为textarea，可以允许输入多条指令，每一行一条
 2. textarea左侧有一列可以显示当前行数的列（代码行数列），列数保持和textarea中一致
