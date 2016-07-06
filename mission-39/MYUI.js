@@ -1,4 +1,4 @@
-var MYUI = (function(){
+﻿var MYUI = (function(){
 	//  sub-unit Table
 	var table =(function(){
 		//save config options
